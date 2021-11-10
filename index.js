@@ -127,10 +127,10 @@ Baby.prototype.play = function(){
 /* 
   TASK 4
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
-  4. 
+  1. Window binding - if you try to use 'this' outside of an object, it will just return the entire javascript window
+  2. Implicit binding - when you are invoking a function that applies to an object, 'this' gets binded to what comes before the function call.
+  3. Explicit binding - When using .call .apply or .bind to bind 'this' 
+  4. New binding - when creating a new object using a constructor function, 'this' is bound to new object being constructed.
 */
 
 
