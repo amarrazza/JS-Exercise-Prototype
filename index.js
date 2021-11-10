@@ -28,7 +28,7 @@ Airplane.prototype.land = function () {
 
 /*
   TASK 1
-    - Write a Person Constructor that initializes `name` and `age` from arguments.
+    - Write a Person Constructor that initializes `name` and `age` from arguments. (means one by one not as obect)
     - All instances of Person should initialize with an empty `stomach` array.
     - Give instances of Person the ability to `.eat("someFood")`:
         + When eating an edible, it should be pushed into the `stomach`.
@@ -39,14 +39,41 @@ Airplane.prototype.land = function () {
         + It should return a string with `name` and `age`. Example: "Mary, 50"
 */
 
-function Person() {
-  
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+  this.stomach = [];
 }
 
+Person.prototype.eat = function(edible){
+  if(this.stomach.length < 10){
+    this.stomach.push(edible);
+  }
+}
 
+Person.prototype.poop = function(){
+  this.stomach = [];
+}
 
+Person.prototype.toString = function(){
+  return `${this.name}, ${this.age}`;
+}
 
+const kyler = new Person('Kyler', 25);
+const ben = new Person('Bennett', 28);
 
+console.log(kyler.toString());
+console.log(ben.toString());
+
+ben.eat('pizza')
+ben.eat('sushi')
+ben.eat('taco')
+ben.eat('sushi')
+
+console.log(ben.stomach);
+
+ben.poop();
+console.log(ben.stomach);
 
 
 /*
@@ -63,10 +90,22 @@ function Person() {
         + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
 */
 
-function Car() {
-  
+function Car(model, milesPerGallon) {
+  this.model = model;
+  this.milesPerGallon = milesPerGallon;
+  this.tank = 0;
+  this.odometer = 0;
 }
 
+Car.prototype.fill = function (gallons){
+  this.tank = this.tank + gallons
+}
+
+const markCar = new Car('cls3', 50);
+console.log(markCar);
+
+markCar.fill(10);
+console.log(markCar);
 
 /*
   TASK 3
@@ -75,8 +114,13 @@ function Car() {
     - Besides the methods on Person.prototype, babies have the ability to `.play()`:
         + Should return a string "Playing with x", x being the favorite toy.
 */
-function Baby() {
- 
+function Baby(name, age, favoriteToy) {
+ Person.call(this, name, age);
+ this.favoriteToy = favoriteToy;
+}
+Baby.prototype = Object.create(Person.prototype);
+Baby.prototype.play = function(){
+  return `Playing with ${this.favoriteToy}`;
 }
 
 
